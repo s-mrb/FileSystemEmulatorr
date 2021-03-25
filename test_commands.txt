@@ -1,0 +1,84 @@
+ls 
+
+make f1 0 
+
+delete f1 
+
+chDir f1 
+
+move f1 f2 
+
+open f1 0 
+
+write f1 0 this is my text 
+
+read f1 0  –1 
+
+truncate f1 7 
+
+close f1 
+
+t 0 f1 0  –1 
+
+t 1 f1 -1 this is my text 
+
+t 2 f1 7 
+
+blocksConsumed f1 
+
+data 0 
+
+memmap 8 
+
+currentInode 
+
+freeSpace 
+
+blockSize 
+
+logicalSpace 
+
+partitionInfo 
+
+masterBloc 
+
+ 
+ Mulltihtreading test
+ 
+ 
+TEST 1
+    	make f1 1
+    
+    	t 0-10 f1 0 -1
+    	t 1 f1 0 Although read operation is performed earlier but 10 second delay in that thread would result in reading this updated data
+    
+   	# after 10 secs
+    	t show
+    
+t 1 f2 0 hhhh
+TEST 2
+	make f1 1
+	make f2 1
+	open f1 1
+	open f2 1
+	write f1 0 text in f1
+	
+	# below read will take 10 secs
+	t 0-10 f1 0 -1 
+	
+	# perform another operation in that 10 secs
+	t 1 f2 0 During that time, text is written in file 2.
+	
+	read f1 0 -1
+	read f2 0 -1
+	
+	
+
+
+
+
+ 
+
+ 
+
+
